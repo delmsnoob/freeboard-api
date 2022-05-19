@@ -2,7 +2,7 @@ import db from '../config/database'
 
 // get all post
 export const getPosts = (result) => {
-  db.query('SELECT * FROM posts', (err, results) => {
+  db.query('SELECT * FROM posts ORDER BY created_at desc', (err, results) => {
     if (err) {
       console.log(err)
       result(err, null)
