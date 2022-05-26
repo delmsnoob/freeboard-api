@@ -1,9 +1,20 @@
-import { addReply } from '../models/commentModel'
+import { addComment, fetchComments } from '../models/commentModel'
 
-// get all post
-export const createReply = (req, res) => {
+// add comment
+export const createComment = (req, res) => {
   const data = req.body
-  addReply(data, (err, results) => {
+  addComment(data, (err, results) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.json(results)
+    }
+  })
+}
+
+// fetch reply by post id
+export const getComments = (req, res) => {
+  fetchComments((err, results) => {
     if (err) {
       res.send(err)
     } else {
