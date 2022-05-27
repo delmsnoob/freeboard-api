@@ -14,7 +14,7 @@ export const createComment = (req, res) => {
 
 // fetch reply by post id
 export const getComments = (req, res) => {
-  fetchComments((err, results) => {
+  fetchComments(req.params.id, (err, results) => {
     if (err) {
       res.send(err)
     } else {

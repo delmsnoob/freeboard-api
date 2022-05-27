@@ -13,7 +13,7 @@ router.put('/posts/:id', updatePost)
 router.delete('/posts/:id', deletePost)
 
 router.post('/comments', createComment)
-router.get('/comments', getComments)
+router.get('/comments/:id', getComments)
 
 export default router
 

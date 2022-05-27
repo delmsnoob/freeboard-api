@@ -13,8 +13,8 @@ export const addComment = (data, result) => {
 }
 
 // fetch reply by post id
-export const fetchComments = (result) => {
-  db.query('SELECT * from comments', (err, results) => {
+export const fetchComments = (id, result) => {
+  db.query('SELECT * from comments WHERE post_id = ? ORDER BY created_at desc', [id], (err, results) => {
     if (err) {
       console.log(err)
       result(err, null)
