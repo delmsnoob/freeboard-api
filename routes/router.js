@@ -4,6 +4,8 @@ import { fetchPosts, fetchPostById, createPost, updatePost, deletePost } from '.
 
 import { createComment, getComments } from '../controllers/comments'
 
+import { createUser, loginUser } from '../controllers/users'
+
 const router = express.Router()
 
 router.get('/posts', fetchPosts)
@@ -14,6 +16,9 @@ router.delete('/posts/:id', deletePost)
 
 router.post('/comments', createComment)
 router.get('/comments/:id', getComments)
+
+router.post('/users/register', createUser)
+router.post('/users/login', loginUser)
 
 export default router
 
