@@ -14,25 +14,16 @@ export const addUser = (data, result) => {
 
 // login user
 export const verifyUser = (username, password, result) => {
-    /* const user = db.query('SELECT id, username, password WHERE username = ', [username], (err, results) => {
-      if (!user) {
-        result(err, null)
-        console.log(err)
-        console.log('LOGIN ERROR: INVALID USERNAME OR PASSWORD');
-      } else {
-        result(null, results)
-        console.log(results, 'results else usersModel')
-      }
-    }) */
   db.query('SELECT id, username, password FROM users WHERE username = ? AND password = ?', [username, password], (err, results) => {
-    if (!err) {
-      console.log('login error');
-      console.log(err)
-      result(err, null)
+    if (results.length > 0) {
+      console.log('login success')
+      // console.log(results.length, 'results')
+      result(err, results)
     } else {
-      console.log('login success');
-      console.log(results)
-      result(null, results)
+      console.log('login error')
+      console.log(err, 'err')
+      console.log(results, 'results')
+      result(err, results)
     }
   })
 }
