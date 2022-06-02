@@ -16,14 +16,15 @@ export const addUser = (data, result) => {
 export const verifyUser = (username, password, result) => {
   db.query('SELECT id, username, password FROM users WHERE username = ? AND password = ?', [username, password], (err, results) => {
     if (results.length > 0) {
+      const token = {
+        id: results[0].id,
+        username: results[0].username
+      }
       console.log('login success')
-      // console.log(results.length, 'results')
-      result(err, results)
+      result(null, token)
     } else {
       console.log('login error')
-      console.log(err, 'err')
-      console.log(results, 'results')
-      result(err, results)
+      result(err, null)      
     }
   })
 }

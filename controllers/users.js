@@ -17,16 +17,13 @@ export const loginUser = (req, res) => {
   const password = req.body.password
 
   verifyUser(username, password, (err, results) => {
-    if (!results) {
-      console.log(results[0].id)
-      console.log(results[0].username)
-      console.log(results.length, 'results users.js')
+    if (results) {
+      console.log(results, 'results users.js')
       // res.json(results)
-      res.send(results)
+      res.json(results)
     } else {
       console.log(err, 'error')
-      res.send(results)
-      res.send(err)
+      res.json(err)
     }
   })
 }

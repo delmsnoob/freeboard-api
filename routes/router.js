@@ -15,6 +15,7 @@ router.put('/posts/:id', updatePost)
 router.delete('/posts/:id', deletePost)
 
 router.post('/comments', createComment)
+router.post('/comments/:id', createComment)
 router.get('/comments/:id', getComments)
 
 router.post('/users/register', createUser)
