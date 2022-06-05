@@ -1,8 +1,9 @@
 import db from '../config/database'
 
+
 // get all post
 export const getPosts = (result) => {
-  db.query('SELECT * FROM posts ORDER BY created_at desc', (err, results) => {
+  db.query('SELECT * FROM posts ORDER BY created_at DESC', (err, results) => {
     if (err) {
       console.log(err)
       result(err, null)
@@ -12,16 +13,36 @@ export const getPosts = (result) => {
   })
 }
 
-// get single post
-export const getPostById = (id, result) => {
-  db.query('SELECT * FROM posts WHERE id = ?', [id], (err, results) => {
-    if (err) {
-      console.log(err)
-      result(err, null)
-    } else {
-      result(null, results[0])
-    }
-  })
+// search posts
+export const searchPost = (search, data, result) => {
+  if (data === null) {
+    db.query('SELECT * FROM posts ORDER BY created_at desc', (err, results) => {
+      if (err) {
+        console.log(err)
+        result(err, null)
+      } else {
+        result(null, results)
+      }
+    })
+  } else if (search === 'created_at') {
+    db.query(`SELECT * FROM posts WHERE created_at LIKE '%${data}%' ORDER BY created_at DESC`, (err, results) => {
+      if (err) {
+        console.log(err)
+        result(err, null)
+      } else {
+        result(null, results)
+      }
+    })
+  } else {
+    db.query(`SELECT * FROM posts WHERE ${search} LIKE '%${data}%' ORDER BY created_at DESC` , (err, results) => {
+      if (err) {
+        console.log(err)
+        result(err, null)
+      } else {
+        result(null, results)
+      }
+    })
+  }
 }
 
 // add post

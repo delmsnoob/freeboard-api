@@ -1,8 +1,22 @@
-import { getPosts, getPostById, addPost, updatePostById, deletePostById } from '../models/postModel'
+import { getPosts, addPost, updatePostById, deletePostById, searchPost } from '../models/postModel'
 
 // get all post
 export const fetchPosts = (req, res) => {
   getPosts((err, results) => {
+    if (err) {
+      res.send(err)
+    } else {
+      res.json(results)
+    }
+  })
+}
+
+// search by post
+export const filterPostsByPost = (req, res) => {
+  const searchBy = req.params.searchBy
+  const keyword = req.params.keyword
+
+  searchPost(searchBy, keyword, (err, results) => {
     if (err) {
       res.send(err)
     } else {
